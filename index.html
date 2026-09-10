@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>  
-        <meta charset="utf-8">
-        <title>待办todo</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <input type="text" id="input">
-        <button type="button" id="add">add</button>
-        <ul id="ul">            
-        </ul>
-        <script>
-            let input=document.getElementById("input");
-            let add = document.getElementById("add");
-            let ul = document.getElementById("ul")
-            let todolist=[];
-            add.onclick = function(){
+
+<head>
+    <meta charset="utf-8">
+    <title>待办todo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <input type="text" id="input">
+    <button type="button" id="add">add</button>
+    <ul id="ul">
+    </ul>
+    <script>
+        let input = document.getElementById("input");
+        let add = document.getElementById("add");
+        let ul = document.getElementById("ul")
+        let todolist = [];
+        add.onclick = function () {
+
+            let li = document.createElement("li")
+            todolist.push({ thing: input.value, status: false })
+            li.textContent = input.value;
+            ul.append(li)
+            console.log(todolist)
+            render()
+
+
+
+        };
+        let render = function () {
+            ul.textContent = "";
+
+            
+            for (let { thing, status } of todolist) {
+                let li = document.createElement("li")
                 
-                let li=document.createElement("li")
-                todolist.push({thing:input.value,status:false})
-                li.textContent = input.value;
+            let finish = document.createElement("button")
+            finish.textContent = "完成"
+                li.textContent = thing
+                li.append(finish)
+
                 ul.append(li)
-                console.log(todolist)
-                render()
-                
-
-
-            };
-            let render=function(){
-                ul.textContent="";
-                let li=document.createElement("li")
-
-                let finish=document.createElement("button")
-                finish.textContent="完成"
-                for (let {thing,status} of todolist){
-                    li.textContent=thing
-                    ul.append(li,finish)
-                }
-
-                
-
             }
-            
-            
-        </script>
-    </body>
+
+
+
+        }
+
+
+    </script>
+</body>
+
 </html>
