@@ -32,14 +32,17 @@
         let render = function () {
             ul.textContent = "";
 
-            
+
             for (let { thing, status } of todolist) {
                 let li = document.createElement("li")
-                
-            let finish = document.createElement("button")
-            finish.textContent = "完成"
+
+                let finish = document.createElement("button")
+                finish.textContent = "完成"
                 li.textContent = thing
                 li.append(finish)
+                finish.onclick=()=>{
+                    status=true;
+                }
 
                 ul.append(li)
             }
