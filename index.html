@@ -8,7 +8,7 @@
     <body>
         <input type="text" id="input">
         <button type="button" id="add">add</button>
-        <ul id="ul">
+        <ul id="ul">            
         </ul>
         <script>
             let input=document.getElementById("input");
@@ -22,9 +22,26 @@
                 li.textContent = input.value;
                 ul.append(li)
                 console.log(todolist)
+                render()
+                
 
 
             };
+            let render=function(){
+                ul.textContent="";
+                let li=document.createElement("li")
+
+                let finish=document.createElement("button")
+                finish.textContent="完成"
+                for (let {thing,status} of todolist){
+                    li.textContent=thing
+                    ul.append(li,finish)
+                }
+
+                
+
+            }
+            
             
         </script>
     </body>
