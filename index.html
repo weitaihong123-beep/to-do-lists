@@ -23,7 +23,7 @@
             todolist.push({ thing: input.value, status: false })
             li.textContent = input.value;
             ul.append(li)
-            console.log(todolist)
+            
             render()
 
 
@@ -33,15 +33,29 @@
             ul.textContent = "";
 
 
-            for (let { thing, status } of todolist) {
+            for (let item of todolist) {
                 let li = document.createElement("li")
 
                 let finish = document.createElement("button")
                 finish.textContent = "完成"
-                li.textContent = thing
-                li.append(finish)
+                let deleteitem = document.createElement("button")
+                deleteitem.textContent = "删除"
+                li.textContent = item.thing
+                li.append(finish,deleteitem)
                 finish.onclick=()=>{
-                    status=true;
+                    item.status=true;
+                    render();
+                    console.log(todolist)
+
+                }
+                deleteitem.onclick=()=>{
+                    delete item;
+                    render();
+
+                }
+                if(item.status===true){
+                    li.style.backgroundColor='#f0f0f0';
+
                 }
 
                 ul.append(li)
