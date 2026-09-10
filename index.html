@@ -19,11 +19,9 @@
         let todolist = [];
         add.onclick = function () {
 
-            let li = document.createElement("li")
             todolist.push({ thing: input.value, status: false })
-            li.textContent = input.value;
-            ul.append(li)
             
+
             render()
 
 
@@ -31,9 +29,7 @@
         };
         let render = function () {
             ul.textContent = "";
-
-
-            for (let item of todolist) {
+            todolist.forEach((item, i) => {
                 let li = document.createElement("li")
 
                 let finish = document.createElement("button")
@@ -41,25 +37,25 @@
                 let deleteitem = document.createElement("button")
                 deleteitem.textContent = "删除"
                 li.textContent = item.thing
-                li.append(finish,deleteitem)
-                finish.onclick=()=>{
-                    item.status=true;
+                li.append(finish, deleteitem)
+                finish.onclick = () => {
+                    item.status = true;
                     render();
                     console.log(todolist)
 
                 }
-                deleteitem.onclick=()=>{
-                    todolist.splice(todolist.indexOf(item),1);
+                deleteitem.onclick = () => {
+                    todolist.splice(i, 1);
                     render();
 
                 }
-                if(item.status===true){
-                    li.style.backgroundColor='#f0f0f0';
+                if (item.status === true) {
+                    li.style.backgroundColor = '#f0f0f0';
 
                 }
 
                 ul.append(li)
-            }
+            })
 
 
 
