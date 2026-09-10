@@ -13,12 +13,13 @@
         <script>
             let input=document.getElementById("input");
             let add = document.getElementById("add");
+            let ul = document.getElementById("ul")
             let todolist=[];
             add.onclick = function(){
                 
                 let li=document.createElement("li")
                 todolist.push({thing:input.value,status:false})
-                li.innerHTML = input.value;
+                li.textContent = input.value;
                 ul.append(li)
                 console.log(todolist)
 
