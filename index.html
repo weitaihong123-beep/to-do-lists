@@ -18,10 +18,21 @@
         let ul = document.getElementById("ul")
         let todolist = [];
         add.onclick = function () {
+            if (input.value === "") {
+                alert("请输入文本")
+            }
+            else {
+                todolist.push({ thing: input.value, status: false })
+                localStorage.setItem("todolist", JSON.stringify(todolist))
 
-            todolist.push({ thing: input.value, status: false })
+            }
+            /*localstorage存的是键值对，但是值如果是属性，那么键要怎么命名不重复呢？
+            为什么一定要单个单个存呢，直接把todolist作为值不就好了。
+            有什么办法监测todolist的状态变化呢？
+            现在做法是增加存一下，删减存一下，状态变化存一下
+            下一步是取出：取出是把仓库给到todolist，所以末尾先加一个函数，这样加载的时候就能把数据传过去
             
-
+            */
             render()
 
 
@@ -40,12 +51,14 @@
                 li.append(finish, deleteitem)
                 finish.onclick = () => {
                     item.status = true;
+                    localStorage.setItem("todolist", JSON.stringify(todolist))
                     render();
                     console.log(todolist)
 
                 }
                 deleteitem.onclick = () => {
                     todolist.splice(i, 1);
+                    localStorage.setItem("todolist", JSON.stringify(todolist))
                     render();
 
                 }
@@ -59,8 +72,15 @@
 
 
 
-        }
-
+        };
+        (() => {
+            todolist = JSON.parse(localStorage.getItem("todolist"))
+            render()
+        })()
+        /*
+        呃，怎么添加功能都用不了了，是不是要等到页面刷新的时候再来赋值
+        为什么74行不写分号会报错，然后怎么影响到添加功能不能使用，等下了解分号机制
+        */
 
     </script>
 </body>
