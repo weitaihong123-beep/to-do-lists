@@ -74,7 +74,10 @@
 
         };
         (() => {
-            todolist = JSON.parse(localStorage.getItem("todolist"))
+            let store = localStorage.getItem("todolist")
+            if (store){
+            todolist = JSON.parse(store)
+            }
             render()
         })()
         /*
